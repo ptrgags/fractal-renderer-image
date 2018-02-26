@@ -1,0 +1,3 @@
+*.flame
+*.flam3
+!apo_test.flame

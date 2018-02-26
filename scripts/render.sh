@@ -10,7 +10,7 @@
 # ./render.sh input_file [quality]
 #
 # Notes:
-# - Quality defaults to 5000. For low-res tests, set it lower!
+# - Quality defaults to 1. Set it higher manually!
 set -e
 
 if [[ -z "$1" ]]
@@ -22,10 +22,15 @@ fi
 
 # Set flam3 settings 
 export name_enable=1
-export qs=${2:-5000}
+export qs=${2:-1}
 
 # Move to /output since
 cd /output 
 
 # Render the fractal
+echo "Rendering with quality $qs"
 flam3-render < /input/$1
+
+# Make sure anyone can modify the output files even if they get created
+# by Docker running as sudo
+chmod 666 /output/*.png

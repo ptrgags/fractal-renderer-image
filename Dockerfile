@@ -21,4 +21,4 @@ WORKDIR /fractals
 COPY scripts/ /fractals/scripts
 
 # Launch Bash so we can try it out!
-CMD ["bash"]
+ENTRYPOINT ["./scripts/render.sh"]
