@@ -17,5 +17,8 @@ RUN make install
 # Move back up to the /fractals directory
 WORKDIR /fractals
 
+# Add the scripts directory to the image
+COPY scripts/ /fractals/scripts
+
 # Launch Bash so we can try it out!
 CMD ["bash"]
