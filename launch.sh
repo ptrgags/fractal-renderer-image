@@ -22,5 +22,15 @@ OUTPUT=$(pwd)/output:/output
 FLAME="$1"
 QUALITY="$2"
 
-# Launch the Docker command.
+# Launch the Docker command and time it in seconds
+START=$(date +'%s')
 sudo docker run -v $INPUT -v $OUTPUT -it fractal-renderer:dev $FLAME $QUALITY
+END=$(date +'%s')
+
+# If SNS_TOPIC is set, send a notification
+SECONDS=$(($END - $START))
+MESSAGE="Rendered $FLAME in $SECONDS sec!"
+if [[ -n "$SNS_TOPIC" ]]
+then
+    aws sns publish --topic-arn "$SNS_TOPIC" --message "$MESSAGE"
+fi
