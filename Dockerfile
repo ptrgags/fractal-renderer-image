@@ -12,6 +12,10 @@ RUN git clone https://github.com/scottdraves/flam3.git
 WORKDIR /fractals/flam3
 RUN ./configure
 RUN make
+RUN make install
+
+# Move back up to the /fractals directory
+WORKDIR /fractals
 
 # Launch Bash so we can try it out!
 CMD ["bash"]
